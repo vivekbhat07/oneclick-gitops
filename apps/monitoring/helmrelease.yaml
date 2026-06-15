@@ -3,6 +3,7 @@ kind: HelmRelease
 metadata:
   name: prometheus
   namespace: monitoring
+
 spec:
   interval: 1m
 
@@ -17,6 +18,11 @@ spec:
 
   values:
     alertmanager:
+      enabled: true
+
+      alertmanagerSpec:
+        useExistingSecret: false
+
       config:
         global:
           smtp_smarthost: 'smtp.gmail.com:587'
@@ -26,10 +32,10 @@ spec:
           smtp_require_tls: true
 
         route:
-          receiver: 'email-notifications'
+          receiver: email-notifications
 
         receivers:
-        - name: 'email-notifications'
+        - name: email-notifications
           email_configs:
           - to: 'vaishjp2005@gmail.com'
             send_resolved: true
