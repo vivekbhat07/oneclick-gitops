@@ -16,26 +16,8 @@ spec:
         name: prometheus-community
         namespace: flux-system
 
- values:
-  alertmanager:
-    alertmanagerSpec:
-      configSecret: alertmanager-prometheus-kube-prometheus-alertmanager
+  values:
+    alertmanager:
+      enabled: true
       alertmanagerSpec:
-        useExistingSecret: false
-
-      config:
-        global:
-          smtp_smarthost: 'smtp.gmail.com:587'
-          smtp_from: 'vaishjp2005@gmail.com'
-          smtp_auth_username: 'vaishjp2005@gmail.com'
-          smtp_auth_password: 'yaxppcbhbukkarsq'
-          smtp_require_tls: true
-
-        route:
-          receiver: email-notifications
-
-        receivers:
-        - name: email-notifications
-          email_configs:
-          - to: 'vaishjp2005@gmail.com'
-            send_resolved: true
+        configSecret: alertmanager-prometheus-kube-prometheus-alertmanager
