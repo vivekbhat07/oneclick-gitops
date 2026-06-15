@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: frontend-down
+  namespace: monitoring
+  labels:
+    release: prometheus
+
+spec:
+  groups:
+  - name: frontend.rules
+    rules:
+    - alert: FrontendPodDown
+      expr: kube_deployment_status_replicas_available{deployment="frontend"} < 1
+      for: 1m
+      labels:
+        severity: critical
+      annotations:
+        summary: Frontend Pod Down
+        description: No frontend pods are available.

@@ -7,3 +7,5 @@ resources:
   - cpu-high.yaml
   - memory-high.yaml
   - crashloop.yaml
+  - backend-down.yaml
+  - frontend-down.yaml
