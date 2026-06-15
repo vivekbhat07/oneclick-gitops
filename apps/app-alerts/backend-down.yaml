@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: backend-down
+  namespace: monitoring
+spec:
+  groups:
+  - name: backend.rules
+    rules:
+    - alert: BackendPodDown
+      expr: kube_deployment_status_replicas_available{deployment="backend"} < 1
+      for: 1m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Backend Pod Down"
+        description: "No backend pods are available."
