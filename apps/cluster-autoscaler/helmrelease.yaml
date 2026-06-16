@@ -32,3 +32,16 @@ spec:
       expander: least-waste
       balance-similar-node-groups: true
       skip-nodes-with-system-pods: false
+    extraEnv:
+      - name: AWS_ACCESS_KEY_ID
+        valueFrom:
+          secretKeyRef:
+            name: cluster-autoscaler-aws-creds
+            key: AWS_ACCESS_KEY_ID
+      - name: AWS_SECRET_ACCESS_KEY
+        valueFrom:
+          secretKeyRef:
+            name: cluster-autoscaler-aws-creds
+            key: AWS_SECRET_ACCESS_KEY
+      - name: AWS_REGION
+        value: ap-south-1
