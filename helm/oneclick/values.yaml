@@ -35,7 +35,7 @@ spec:
       user: postgres
 backend:
   image:
-    tag: 76b23d6
+    tag: 0bee757
 frontend:
   image:
-    tag: 76b23d6
+    tag: 0bee757
