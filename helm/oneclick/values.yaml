@@ -1,20 +1,40 @@
-frontend:
-  image:
-    repository: 155734788051.dkr.ecr.ap-south-1.amazonaws.com/frontend
-    tag: "cc8c5df"
-  replicas: 2
-  service:
-    type: LoadBalancer
-    port: 80
-    targetPort: 3000
-backend:
-  image:
-    repository: 155734788051.dkr.ecr.ap-south-1.amazonaws.com/backend
-    tag: "cc8c5df"
-  replicas: 2
-  service:
-    type: ClusterIP
-    port: 3001
-database:
-  host: oneclick-postgres.c52qmcwm825v.ap-south-1.rds.amazonaws.com
-  user: postgres
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: oneclick
+  namespace: default
+
+spec:
+  interval: 1m
+
+  chart:
+    spec:
+      chart: ./helm/oneclick
+      sourceRef:
+        kind: GitRepository
+        name: oneclick
+        namespace: flux-system
+
+  values:
+    frontend:
+      image:
+        repository: 155734788051.dkr.ecr.ap-south-1.amazonaws.com/frontend
+        tag: "cc8c5df"
+      replicas: 2
+      service:
+        type: LoadBalancer
+        port: 80
+        targetPort: 3000
+
+    backend:
+      image:
+        repository: 155734788051.dkr.ecr.ap-south-1.amazonaws.com/backend
+        tag: "cc8c5df"
+      replicas: 2
+      service:
+        type: ClusterIP
+        port: 3001
+
+    database:
+      host: oneclick-postgres.c52qmcwm825v.ap-south-1.rds.amazonaws.com
+      user: postgres
