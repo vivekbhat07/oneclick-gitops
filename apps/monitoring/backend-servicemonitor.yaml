@@ -5,13 +5,16 @@ metadata:
   namespace: monitoring
   labels:
     release: prometheus
+
 spec:
   selector:
     matchLabels:
       app: backend
+
   namespaceSelector:
     matchNames:
       - default
+
   endpoints:
     - port: http
       path: /metrics
