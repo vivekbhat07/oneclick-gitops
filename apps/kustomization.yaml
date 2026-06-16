@@ -8,3 +8,4 @@ resources:
   - autoscaling
   - cluster-autoscaler
   - ingress-nginx
+  - external-secrets
