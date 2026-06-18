@@ -19,6 +19,7 @@ metadata:
   namespace: jenkins
 spec:
   interval: 10m
+
   chart:
     spec:
       chart: jenkins
@@ -59,6 +60,7 @@ spec:
 
       JCasC:
         defaultConfig: true
+
         configScripts:
 
           credentials: |
@@ -140,7 +142,7 @@ spec:
                     mountPath: /shared-bin
 
                 - name: aws-cli-install
-                  image: amazon/aws-cli:2
+                  image: public.ecr.aws/aws-cli/aws-cli:latest
                   command:
                   - sh
                   - -c
@@ -204,6 +206,7 @@ spec:
                     mountPath: /shared-bin
 
                 volumes:
+
                 - name: shared-bin
                   emptyDir: {}
 
