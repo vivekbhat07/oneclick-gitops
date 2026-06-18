@@ -1,3 +1,85 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: jenkins
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://charts.jenkins.io
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jenkins
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: jenkins
+  namespace: jenkins
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: jenkins
+      version: "5.*"
+      sourceRef:
+        kind: HelmRepository
+        name: jenkins
+        namespace: flux-system
+  values:
+    controller:
+      resources:
+        requests:
+          cpu: 250m
+          memory: 512Mi
+        limits:
+          cpu: "1"
+          memory: 1Gi
+      installPlugins:
+        - kubernetes:latest
+        - workflow-aggregator:latest
+        - git:latest
+        - configuration-as-code:latest
+        - docker-workflow:latest
+        - credentials-binding:latest
+        - github:latest
+        - job-dsl:latest
+      JCasC:
+        defaultConfig: true
+        configScripts:
+          seed-jobs: |
+            jobs:
+              - script: >
+                  pipelineJob('oneclick-pipeline') {
+                    definition {
+                      cpsScm {
+                        scm {
+                          git {
+                            remote { url('https://github.com/vaishjp/Kobie_Hackathon_Project.git') }
+                            branch('main')
+                          }
+                        }
+                        scriptPath('Jenkinsfile')
+                      }
+                    }
+                    triggers { githubPush() }
+                  }
+              - script: >
+                  pipelineJob('drift-detection') {
+                    definition {
+                      cpsScm {
+                        scm {
+                          git {
+                            remote { url('https://github.com/vaishjp/Kobie_Hackathon_Project.git') }
+                            branch('main')
+                          }
+                        }
+                        scriptPath('Jenkinsfile.drift')
+                      }
+                    }
+                    triggers { cron('H 2 * * *') }
+                  }
     agent:
       podTemplates:
         dind: |
@@ -15,7 +97,6 @@
                   volumeMounts:
                   - name: shared-bin
                     mountPath: /shared-bin
-
                 - name: aws-cli-install
                   image: amazon/aws-cli:2
                   command:
@@ -27,14 +108,12 @@
                   volumeMounts:
                   - name: shared-bin
                     mountPath: /shared-bin
-
                 - name: kubectl-install
                   image: bitnami/kubectl:1.35
                   command: ["sh", "-c", "cp /opt/bitnami/kubectl/bin/kubectl /shared-bin/kubectl"]
                   volumeMounts:
                   - name: shared-bin
                     mountPath: /shared-bin
-
                 containers:
                 - name: docker
                   image: docker:24-dind
@@ -59,7 +138,6 @@
                   volumeMounts:
                   - name: shared-bin
                     mountPath: /shared-bin
-
                 - name: jnlp
                   image: jenkins/inbound-agent:latest
                   env:
@@ -70,7 +148,15 @@
                   volumeMounts:
                   - name: shared-bin
                     mountPath: /shared-bin
-
                 volumes:
                 - name: shared-bin
                   emptyDir: {}
+    persistence:
+      enabled: true
+      size: 8Gi
+      storageClass: gp2
+    serviceAccount:
+      create: true
+      name: jenkins
+      annotations:
+        eks.amazonaws.com/role-arn: "arn:aws:iam::155734788051:role/oneclick-jenkins-irsa"
