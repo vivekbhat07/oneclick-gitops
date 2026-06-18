@@ -80,6 +80,7 @@ spec:
                     }
                     triggers { cron('H 2 * * *') }
                   }
+    agent:
       podTemplates:
         dind: |
           - name: dind-agent
