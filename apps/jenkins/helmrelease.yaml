@@ -127,58 +127,7 @@ spec:
               apiVersion: v1
               kind: Pod
               spec:
-
-                initContainers:
-
-                - name: trivy-install
-                  image: aquasec/trivy:0.65.0
-                  command:
-                  - sh
-                  - -c
-                  - |
-                    cp /usr/local/bin/trivy /shared-bin/trivy
-                  volumeMounts:
-                  - name: shared-bin
-                    mountPath: /shared-bin
-
-                - name: aws-cli-install
-                  image: public.ecr.aws/aws-cli/aws-cli:latest
-                  command:
-                  - sh
-                  - -c
-                  - |
-                    cp -r /usr/local/aws-cli /shared-bin/aws-cli-dist
-                    ln -s /shared-bin/aws-cli-dist/v2/current/bin/aws /shared-bin/aws
-                  volumeMounts:
-                  - name: shared-bin
-                    mountPath: /shared-bin
-
-                - name: kubectl-install
-                  image: curlimages/curl:8.10.1
-                  command:
-                  - sh
-                  - -c
-                  - |
-                    KVER=$(curl -sL https://dl.k8s.io/release/stable.txt)
-                    curl -sL https://dl.k8s.io/release/${KVER}/bin/linux/amd64/kubectl -o /shared-bin/kubectl
-                    chmod +x /shared-bin/kubectl
-                  volumeMounts:
-                  - name: shared-bin
-                    mountPath: /shared-bin
-
-                - name: docker-cli-install
-                  image: docker:24
-                  command:
-                  - sh
-                  - -c
-                  - |
-                    cp /usr/local/bin/docker /shared-bin/docker
-                  volumeMounts:
-                  - name: shared-bin
-                    mountPath: /shared-bin
-
                 containers:
-
                 - name: docker
                   image: docker:24-dind
                   command: ["dockerd-entrypoint.sh"]
@@ -194,25 +143,12 @@ spec:
                     limits:
                       cpu: "2"
                       memory: "2Gi"
-                  volumeMounts:
-                  - name: shared-bin
-                    mountPath: /shared-bin
-
                 - name: jnlp
-                  image: jenkins/inbound-agent:latest
+                  image: 155734788051.dkr.ecr.ap-south-1.amazonaws.com/jenkins-agent:latest
+                  imagePullPolicy: Always
                   env:
                   - name: DOCKER_HOST
                     value: "tcp://localhost:2375"
-                  - name: PATH
-                    value: "/shared-bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-                  volumeMounts:
-                  - name: shared-bin
-                    mountPath: /shared-bin
-
-                volumes:
-
-                - name: shared-bin
-                  emptyDir: {}
 
     persistence:
       enabled: true
