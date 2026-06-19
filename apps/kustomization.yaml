@@ -9,3 +9,4 @@ resources:
   - ingress-nginx
   - external-secrets
   - jenkins
+  - jenkins-rbac
