@@ -181,6 +181,7 @@ spec:
 
                 - name: docker
                   image: docker:24-dind
+                  command: ["dockerd-entrypoint.sh"]
                   securityContext:
                     privileged: true
                   env:
@@ -193,6 +194,9 @@ spec:
                     limits:
                       cpu: "2"
                       memory: "2Gi"
+                  volumeMounts:
+                  - name: shared-bin
+                    mountPath: /shared-bin
 
                 - name: jnlp
                   image: jenkins/inbound-agent:latest
