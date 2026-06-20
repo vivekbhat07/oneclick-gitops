@@ -27,7 +27,7 @@ spec:
     frontend:
       image:
         repository: 155734788051.dkr.ecr.ap-south-1.amazonaws.com/frontend
-        tag: "a2f33d0-13"
+        tag: "5d2bd9c-14"
       replicas: 2
       service:
         type: LoadBalancer
@@ -37,7 +37,7 @@ spec:
     backend:
       image:
         repository: 155734788051.dkr.ecr.ap-south-1.amazonaws.com/backend
-        tag: "a2f33d0-13"
+        tag: "5d2bd9c-14"
       replicas: 2
       service:
         type: ClusterIP
