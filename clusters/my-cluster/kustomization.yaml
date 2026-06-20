@@ -6,3 +6,4 @@ resources:
   - alerting.yaml
   - monitoring-config.yaml
   - external-secrets-config.yaml
+  - jenkins-secret.yaml
