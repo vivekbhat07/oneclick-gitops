@@ -19,3 +19,25 @@ roleRef:
   kind: ClusterRole
   name: jenkins-helmrelease-viewer
   apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: k8sgpt-readonly
+rules:
+  - apiGroups: ["", "apps", "batch", "networking.k8s.io", "admissionregistration.k8s.io"]
+    resources: ["pods", "nodes", "endpoints", "persistentvolumeclaims", "deployments", "replicasets", "statefulsets", "cronjobs", "ingresses", "validatingwebhookconfigurations", "mutatingwebhookconfigurations"]
+    verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: jenkins-k8sgpt-readonly
+subjects:
+  - kind: ServiceAccount
+    name: jenkins
+    namespace: jenkins
+roleRef:
+  kind: ClusterRole
+  name: k8sgpt-readonly
+  apiGroup: rbac.authorization.k8s.io
