@@ -5,13 +5,14 @@ metadata:
   namespace: jenkins
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   rules:
     - http:
         paths:
-          - path: /
-            pathType: Prefix
+          - path: /jenkins(/|$)(.*)
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: jenkins
