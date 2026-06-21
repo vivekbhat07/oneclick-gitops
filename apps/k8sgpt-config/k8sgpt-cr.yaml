@@ -4,7 +4,6 @@ metadata:
   name: k8sgpt-ollama
   namespace: k8sgpt-operator-system
 spec:
-  interval: 30s
   ai:
     enabled: true
     backend: localai
