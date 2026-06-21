@@ -28,26 +28,3 @@ spec:
         name: k8sgpt
         namespace: flux-system
   values: {}
----
-apiVersion: core.k8sgpt.ai/v1alpha1
-kind: K8sGPT
-metadata:
-  name: k8sgpt-ollama
-  namespace: k8sgpt-operator-system
-spec:
-  ai:
-    enabled: true
-    backend: ollama
-    model: llama3.2:1b
-    baseUrl: http://ollama.jenkins.svc.cluster.local:11434
-    noCache: false
-  noCache: false
-  filters:
-    - Pod
-    - Deployment
-    - Service
-    - Ingress
-    - PersistentVolumeClaim
-    - StatefulSet
-  repository: ghcr.io/k8sgpt-ai/k8sgpt
-  version: v0.4.16
