@@ -7,3 +7,4 @@ resources:
   - monitoring-config.yaml
   - external-secrets-config.yaml
   - jenkins-secret.yaml
+  - k8sgpt-config.yaml
