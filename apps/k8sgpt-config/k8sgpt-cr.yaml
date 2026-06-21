@@ -9,9 +9,8 @@ spec:
     backend: ollama
     model: llama3.2:1b
     baseUrl: http://ollama.jenkins.svc.cluster.local:11434
-    noCache: false
-   
- filters:
+  noCache: false
+  filters:
     - Pod
     - Deployment
     - Service
