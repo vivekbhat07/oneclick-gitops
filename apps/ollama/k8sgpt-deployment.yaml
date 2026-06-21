@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8sgpt
+  namespace: jenkins
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8sgpt
+  template:
+    metadata:
+      labels:
+        app: k8sgpt
+    spec:
+      serviceAccountName: jenkins
+      containers:
+        - name: k8sgpt
+          image: 155734788051.dkr.ecr.ap-south-1.amazonaws.com/jenkins-agent:latest
+          command:
+            - sh
+            - -c
+            - |
+              k8sgpt auth add \
+                --backend ollama \
+                --model llama3.2:1b \
+                --baseurl http://ollama.jenkins.svc.cluster.local:11434
+              sleep infinity
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
