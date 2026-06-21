@@ -10,8 +10,8 @@ spec:
     model: llama3.2:1b
     baseUrl: http://ollama.jenkins.svc.cluster.local:11434
     noCache: false
-  noCache: false
-  filters:
+   
+ filters:
     - Pod
     - Deployment
     - Service
