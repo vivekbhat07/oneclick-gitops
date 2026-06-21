@@ -6,9 +6,9 @@ metadata:
 spec:
   ai:
     enabled: true
-    backend: ollama
+    backend: localai
     model: llama3.2:1b
-    baseUrl: http://ollama.jenkins.svc.cluster.local:11434
+    baseUrl: http://ollama.jenkins.svc.cluster.local:11434/v1
   noCache: false
   filters:
     - Pod
