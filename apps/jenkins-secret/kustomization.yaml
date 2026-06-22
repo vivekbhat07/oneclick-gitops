@@ -5,3 +5,4 @@ resources:
   - jenkins-admin-secret.yaml
   - db-secret-jenkins.yaml
   - jenkins-infracost-secret.yaml
+  - grafana-admin-secret.yaml
