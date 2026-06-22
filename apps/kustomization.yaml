@@ -12,3 +12,5 @@ resources:
   - jenkins-rbac
   - ollama
   - k8sgpt-operator
+  - jenkins-secret
+  - k8sgpt-config
