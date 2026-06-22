@@ -18,14 +18,12 @@ spec:
       enabled: true
       alertmanagerSpec:
         configSecret: alertmanager-prometheus-kube-prometheus-alertmanager
-
     grafana:
-      adminPassword: "${GRAFANA_PASSWORD}"
       envFromSecret: grafana-admin-secret
       grafana.ini:
         server:
-          root_url: "%(protocol)s://%(domain)s/grafana"
           serve_from_sub_path: true
+          root_url: "%(protocol)s://%(domain)s:%(http_port)s/grafana/"
       ingress:
         enabled: true
         ingressClassName: nginx
