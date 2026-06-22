@@ -26,7 +26,7 @@ metadata:
   name: k8sgpt-readonly
 rules:
   - apiGroups: ["", "apps", "batch", "networking.k8s.io", "admissionregistration.k8s.io"]
-    resources: ["pods", "nodes", "endpoints", "persistentvolumeclaims", "deployments", "replicasets", "statefulsets", "cronjobs", "ingresses", "validatingwebhookconfigurations", "mutatingwebhookconfigurations"]
+    resources: ["pods", "nodes", "endpoints", "persistentvolumeclaims", "deployments", "replicasets", "statefulsets", "cronjobs", "ingresses", "validatingwebhookconfigurations", "mutatingwebhookconfigurations", "secrets", "events"]
     verbs: ["get", "list"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
