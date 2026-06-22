@@ -4,3 +4,4 @@ resources:
   - jenkins-github-secret.yaml
   - jenkins-admin-secret.yaml
   - db-secret-jenkins.yaml
+  - jenkins-infracost-secret.yaml

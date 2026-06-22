@@ -68,6 +68,11 @@ spec:
             secretKeyRef:
               name: db-secret
               key: DB_PASSWORD
+        - name: INFRACOST_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: jenkins-infracost-secret
+              key: key      
       JCasC:
         defaultConfig: true
 
