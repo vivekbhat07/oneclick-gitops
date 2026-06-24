@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: crash-1
+  namespace: monitoring
+  labels:
+    release: prometheus
+
+spec:
+  groups:
+  - name: crashloop.rules
+    rules:
+    - alert: CrashLoopBackOff
+      expr: kube_pod_container_status_waiting_reason{pod=~"frontend.*",reason="CrashLoopBackOff"} > 0
+      for: 1m
+      labels:
+        severity: critical
+      annotations:
+        summary: CrashLoopBackOff
+        description: frontend pod is crashing repeatedly.
