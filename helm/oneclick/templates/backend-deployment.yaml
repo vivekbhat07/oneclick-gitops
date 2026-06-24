@@ -16,24 +16,84 @@ spec:
         - name: backend
           image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
           ports:
-            - containerPort: 3001
+            - containerPort: 4000
               name: http
           env:
-            - name: DB_HOST
+            # ---- from backend-secret (ExternalSecret -> oneclick/backend-credentials) ----
+            - name: PGHOST
               valueFrom:
                 secretKeyRef:
-                  name: db-secret
-                  key: DB_HOST
-            - name: DB_USER
+                  name: backend-secret
+                  key: PGHOST
+            - name: PGUSER
               valueFrom:
                 secretKeyRef:
-                  name: db-secret
-                  key: DB_USER
-            - name: DB_PASSWORD
+                  name: backend-secret
+                  key: PGUSER
+            - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: db-secret
-                  key: DB_PASSWORD
+                  name: backend-secret
+                  key: PGPASSWORD
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: JWT_SECRET
+            - name: GITHUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: GITHUB_TOKEN
+            - name: GITHUB_OWNER
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: GITHUB_OWNER
+            - name: GITHUB_REPO
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: GITHUB_REPO
+            - name: SMTP_USER
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: SMTP_USER
+            - name: SMTP_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: SMTP_PASS
+            # ---- plain, non-secret config (from Helm values) ----
+            - name: PORT
+              value: {{ .Values.backend.env.port | quote }}
+            - name: CORS_ORIGIN
+              value: {{ .Values.backend.env.corsOrigin | quote }}
+            - name: JWT_EXPIRES_IN
+              value: {{ .Values.backend.env.jwtExpiresIn | quote }}
+            - name: ALLOWED_EMAIL_DOMAINS
+              value: {{ .Values.backend.env.allowedEmailDomains | quote }}
+            - name: OTP_TTL_MINUTES
+              value: {{ .Values.backend.env.otpTtlMinutes | quote }}
+            - name: PGPORT
+              value: {{ .Values.backend.env.pgPort | quote }}
+            - name: PGDATABASE
+              value: {{ .Values.backend.env.pgDatabase | quote }}
+            - name: PGSSL
+              value: {{ .Values.backend.env.pgSsl | quote }}
+            - name: SMTP_HOST
+              value: {{ .Values.backend.env.smtpHost | quote }}
+            - name: SMTP_PORT
+              value: {{ .Values.backend.env.smtpPort | quote }}
+            - name: SMTP_SECURE
+              value: {{ .Values.backend.env.smtpSecure | quote }}
+            - name: SMTP_FROM
+              value: {{ .Values.backend.env.smtpFrom | quote }}
+            - name: GITHUB_BRANCH
+              value: {{ .Values.backend.env.githubBranch | quote }}
+            - name: GITHUB_ALERTS_DIR
+              value: {{ .Values.backend.env.githubAlertsDir | quote }}
           resources:
             requests:
               cpu: "100m"

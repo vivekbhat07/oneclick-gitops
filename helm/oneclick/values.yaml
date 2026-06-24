@@ -15,4 +15,19 @@ backend:
   replicas: 2
   service:
     type: ClusterIP
-    port: 3001
+    port: 4000
+  env:
+    port: "4000"
+    corsOrigin: "http://CHANGE-ME-to-real-frontend-url"   # e.g. http://<LB-hostname> or your domain — localhost:5173 only works locally
+    jwtExpiresIn: "12h"
+    allowedEmailDomains: "pesu.pes.edu,kobie.ai"
+    otpTtlMinutes: "10"
+    pgPort: "5432"
+    pgDatabase: "alert_portal"
+    pgSsl: "true"          # verify against your RDS instance's SSL enforcement setting
+    smtpHost: "smtp.gmail.com"
+    smtpPort: "587"
+    smtpSecure: "false"
+    smtpFrom: "vaishjp2005@gmail.com"
+    githubBranch: "main"
+    githubAlertsDir: "apps/alerting"   # matches your actual repo folder, NOT the code's default "apps/alerts"
