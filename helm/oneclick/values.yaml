@@ -20,7 +20,7 @@ backend:
     port: "4000"
     corsOrigin: "http://a5a4920cd12a94d16b7199b7ad3c3552-114132047.ap-south-1.elb.amazonaws.com"   # e.g. http://<LB-hostname> or your domain — localhost:5173 only works locally
     jwtExpiresIn: "12h"
-    allowedEmailDomains: "pesu.pes.edu,kobie.ai"
+    allowedEmailDomains: "pesu.pes.edu,kobie.com"
     otpTtlMinutes: "10"
     pgPort: "5432"
     pgDatabase: "alert_portal"
