@@ -26,7 +26,7 @@ spec:
   values:
     frontend:
       image:
-        repository: 155734788051.dkr.ecr.ap-south-1.amazonaws.com/frontend
+        repository: 286836106281.dkr.ecr.ap-south-1.amazonaws.com/frontend
         tag: "485dc12-7"
       replicas: 2
       service:
@@ -36,7 +36,7 @@ spec:
 
     backend:
       image:
-        repository: 155734788051.dkr.ecr.ap-south-1.amazonaws.com/backend
+        repository: 286836106281.dkr.ecr.ap-south-1.amazonaws.com/backend
         tag: "485dc12-7"
       replicas: 2
       service:

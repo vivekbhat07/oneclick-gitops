@@ -17,4 +17,4 @@ spec:
     installCRDs: true
     serviceAccount:
       annotations:
-        eks.amazonaws.com/role-arn: "arn:aws:iam::155734788051:role/oneclick-eso-irsa"
+        eks.amazonaws.com/role-arn: "arn:aws:iam::286836106281:role/oneclick-eso-irsa"

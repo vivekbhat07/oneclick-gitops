@@ -16,7 +16,7 @@ spec:
       serviceAccountName: jenkins
       containers:
         - name: k8sgpt
-          image: 155734788051.dkr.ecr.ap-south-1.amazonaws.com/jenkins-agent:latest
+          image: 286836106281.dkr.ecr.ap-south-1.amazonaws.com/jenkins-agent:latest
           imagePullPolicy: Always
           command:
             - sh

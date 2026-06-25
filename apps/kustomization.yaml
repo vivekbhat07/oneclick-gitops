@@ -11,5 +11,5 @@ resources:
   - jenkins
   - jenkins-rbac
   - ollama
-  
+  - k8sgpt-operator
   

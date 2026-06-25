@@ -23,7 +23,7 @@ spec:
         create: true
         name: cluster-autoscaler
         annotations:
-          eks.amazonaws.com/role-arn: "arn:aws:iam::155734788051:role/oneclick-cluster-autoscaler-irsa"
+          eks.amazonaws.com/role-arn: "arn:aws:iam::286836106281:role/oneclick-cluster-autoscaler-irsa"
     extraArgs:
       balance-similar-node-groups: true
       skip-nodes-with-system-pods: false
