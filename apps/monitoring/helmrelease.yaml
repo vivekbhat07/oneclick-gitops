@@ -20,9 +20,9 @@ spec:
         global:
           resolve_timeout: 5m
           smtp_smarthost: 'smtp.gmail.com:587'
-          smtp_from: 'vaishjp2005@gmail.com'
-          smtp_auth_username: 'vaishjp2005@gmail.com'
-          smtp_auth_password: 'sufscwbkkppqiria'
+          smtp_from: 'vbhat7262@gmail.com'
+          smtp_auth_username: 'vbhat7262@gmail.com'
+          smtp_auth_password: 'oyox kmyr kwvr ebmd'
           smtp_require_tls: true
         inhibit_rules:
         - source_matchers:
