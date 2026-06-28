@@ -8,4 +8,3 @@ resources:
   - memory-high.yaml
   - crashloop.yaml
   - backend-down.yaml
-  - frontend-down.yaml
