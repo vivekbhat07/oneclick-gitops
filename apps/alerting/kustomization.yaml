@@ -8,3 +8,4 @@ resources:
   - memory-high.yaml
   - crashloop.yaml
   - pods-down-2.yaml
+  - pods-down-3.yaml
