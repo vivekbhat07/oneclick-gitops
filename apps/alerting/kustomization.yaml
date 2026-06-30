@@ -9,3 +9,4 @@ resources:
   - crashloop.yaml
   - pods-down-2.yaml
   - pods-down-3.yaml
+  - test-alert-4.yaml
