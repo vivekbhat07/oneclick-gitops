@@ -14,8 +14,26 @@ spec:
         name: prometheus-community
         namespace: flux-system
   values:
+    prometheus:
+      prometheusSpec:
+        resources:
+          requests:
+            cpu: 500m
+            memory: 1Gi
+          limits:
+            cpu: 1
+            memory: 2Gi
+
     alertmanager:
       enabled: true
+      alertmanagerSpec:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 100m
+            memory: 128Mi
       config:
         global:
           resolve_timeout: 5m
@@ -63,8 +81,16 @@ spec:
           email_configs:
           - to: 'vbhat7262@gmail.com'
             send_resolved: true
+
     grafana:
       adminPassword: "YourGrafanaPass123!"
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 200m
+          memory: 256Mi
       grafana.ini:
         server:
           root_url: "%(protocol)s://%(domain)s/grafana/"
@@ -76,3 +102,12 @@ spec:
           nginx.ingress.kubernetes.io/use-regex: "true"
         path: /grafana
         pathType: Prefix
+
+    prometheus-node-exporter:
+      resources:
+        requests:
+          cpu: 50m
+          memory: 64Mi
+        limits:
+          cpu: 100m
+          memory: 128Mi
