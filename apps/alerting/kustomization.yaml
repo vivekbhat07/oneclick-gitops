@@ -7,3 +7,4 @@ resources:
   - cpu-high.yaml
   - memory-high.yaml
   - crashloop.yaml
+  - pods-down-2.yaml
