@@ -7,3 +7,4 @@ resources:
   - cpu-high.yaml
   - memory-high.yaml
   - crashloop.yaml
+  - crash-2.yaml
