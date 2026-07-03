@@ -37,7 +37,7 @@ spec:
         global:
           resolve_timeout: 5m
           smtp_smarthost: 'smtp.gmail.com:587'
-          smtp_from: 'vbhat7262@gmail.com'
+          smtp_from: 'bhatvivek915@gmail.com'
           smtp_auth_username: 'bhatvivek915@gmail.com'
           smtp_auth_password: 'kpuh crrb pnpi pdre'
           smtp_require_tls: true
