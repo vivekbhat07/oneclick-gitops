@@ -4,7 +4,4 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - test-alert.yaml
-  - cpu-high.yaml
-  - memory-high.yaml
-  - crashloop.yaml
   - crash-2.yaml
