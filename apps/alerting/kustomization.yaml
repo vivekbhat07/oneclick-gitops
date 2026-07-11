@@ -3,6 +3,3 @@ kind: Kustomization
 
 resources:
   - namespace.yaml
-  - test-alert.yaml
-  - crash-2.yaml
-  - test-alert-4.yaml
