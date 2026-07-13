@@ -3,3 +3,4 @@ kind: Kustomization
 
 resources:
   - namespace.yaml
+  - pods-down-3.yaml
