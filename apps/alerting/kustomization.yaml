@@ -7,3 +7,4 @@ resources:
   - pods-down-3.yaml
   - pods-down-4.yaml
   - pods-down-6.yaml
+  - random-1.yaml
